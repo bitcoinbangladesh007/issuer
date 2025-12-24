@@ -46,26 +46,47 @@ const TransactionResult = ({
   };
 
   const generateQRCodeUrl = (txId: string) => {
-    // Generate a QR code using an external service
-    const cybercrimeLinkWithTxId = `https://cybercrime.gov.in/Webform/chkackstatus.aspx?txid=${encodeURIComponent(txId)}`;
-    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(cybercrimeLinkWithTxId)}`;
+    // Generate a QR code using an external service - directly with transaction ID
+    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(txId)}`;
   };
 
   return (
     <Card className="w-full max-w-4xl mx-auto bg-white shadow-2xl border-2 border-[#138808]/20">
       <CardHeader className="bg-gradient-to-r from-[#FF9933] via-[#FF9933] to-[#138808] text-white">
-        <div className="text-center">
-          <div className="flex items-center justify-center mb-4">
-            <div className="p-3 bg-white/20 rounded-full">
-              <CheckCircle2 className="h-8 w-8" />
-            </div>
+        <div className="flex items-center justify-between">
+          {/* Arunachal Police Logo - Left */}
+          <div className="flex-shrink-0">
+            <img 
+              src="/arunachal_police_logo.png" 
+              alt="Arunachal Police Logo" 
+              className="h-28 w-28 object-contain"
+            />
           </div>
-          <CardTitle className="text-3xl font-bold mb-2">
-            Transaction Complete
-          </CardTitle>
-          <CardDescription className="text-white/90 text-lg">
-            Your hash has been successfully stored on Blockchain for life time!
-          </CardDescription>
+          
+          {/* Center Content */}
+          <div className="text-center flex-1 px-4">
+            <div className="flex items-center justify-center mb-4">
+              <div className="p-3 bg-white/20 rounded-full">
+                <CheckCircle2 className="h-8 w-8" />
+              </div>
+            </div>
+            <CardTitle className="text-3xl font-bold mb-2">
+              Transaction Complete
+            </CardTitle>
+            <CardDescription className="text-white/90 text-lg">
+              Your hash has been successfully stored on Blockchain for life time!
+            </CardDescription>
+          </div>
+          
+          {/* Hills Society Logo - Right */}
+          <div className="flex-shrink-0 text-center">
+            <p className="text-white/80 text-xs font-medium mb-1">DEMO PRESENTED BY</p>
+            <img 
+              src="/hills_society_logo.png" 
+              alt="Hills Society Logo" 
+              className="h-20 w-20 object-contain"
+            />
+          </div>
         </div>
       </CardHeader>
 
@@ -89,7 +110,7 @@ const TransactionResult = ({
                     <div className="p-2 bg-[#138808]/20 rounded-lg mr-3">
                       <CheckCircle2 className="h-4 w-4 text-[#138808]" />
                     </div>
-                    I4C Address
+                    Arunachal Police Station 5 Address
                   </h3>
                   <Badge className="bg-[#138808] text-white">Verified</Badge>
                 </div>

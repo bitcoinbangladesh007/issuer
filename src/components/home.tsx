@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import ImageUploader from "./ImageUploader";
 import TransactionForm from "./TransactionForm";
 import TransactionResult from "./TransactionResult";
@@ -64,7 +65,7 @@ const Home = () => {
       const suggestedParams = await algodClient.getTransactionParams().do();
 
       // Create note with custom text and image hash
-      const noteText = `${text}${hashData.hash ? ` | Hash: ${hashData.hash}` : ""}`;
+      const noteText = `${text}${hashData.hash ? ` | ${hashData.hash}` : ""}`;
       const note = new Uint8Array(Buffer.from(noteText, "utf8"));
 
       // Create payment transaction (sending 0 ALGO to self with note)
@@ -114,24 +115,62 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* Professional Header */}
-      <div className="bg-gradient-to-r from-[#FF9933] via-[#FF9933] to-[#138808] shadow-lg">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="text-center">
-            <div className="text-center mb-4">
-              <h1 className="text-4xl font-bold text-white mb-2">
-                I4C Temper Proof Evidence Collection
-              </h1>
-              <Badge
-                variant="secondary"
-                className="bg-white/20 text-white border-white/30"
-              >
-                Testnet Ready
-              </Badge>
+      <div className="relative shadow-lg overflow-hidden">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-[#FF9933] via-[#FF9933] to-[#138808]"
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            backgroundSize: ["200% 100%", "250% 100%", "200% 100%"],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            background:
+              "linear-gradient(90deg, #FF9933 0%, #FF9933 35%, #138808 65%, #138808 100%)",
+          }}
+        />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-8">
+          <div className="flex items-center justify-between">
+            {/* Arunachal Police Logo - Left */}
+            <div className="flex-shrink-0">
+              <img 
+                src="/arunachal_police_logo.png" 
+                alt="Arunachal Police Logo" 
+                className="h-32 w-32 object-contain"
+              />
             </div>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
-              Securely upload images, calculate SHA-256 hashes, and digitally
-              signed hashes in a temper proof storage using blockchain features
-            </p>
+            
+            {/* Center Content */}
+            <div className="text-center flex-1 px-4">
+              <div className="text-center mb-4">
+                <h1 className="text-4xl font-bold text-white mb-2">
+                  Temper Proof Evidence Collection
+                </h1>
+                <Badge
+                  variant="secondary"
+                  className="bg-white/20 text-white border-white/30"
+                >
+                  Testnet Ready
+                </Badge>
+              </div>
+              <p className="text-white/90 text-lg max-w-2xl mx-auto">
+                Securely upload images, calculate SHA-256 hashes, and digitally
+                signed hashes in a temper proof storage using blockchain features
+              </p>
+            </div>
+            
+            {/* Hills Society Logo - Right */}
+            <div className="flex-shrink-0 text-center">
+              <p className="text-white/80 text-xs font-medium mb-1">DEMO PRESENTED BY</p>
+              <img 
+                src="/hills_society_logo.png" 
+                alt="Hills Society Logo" 
+                className="h-24 w-24 object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -238,10 +277,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto px-6 py-8">
           <div className="text-center">
             <p className="text-white/90 text-sm">
-              Powered by Algorand Blockchain • Built with React & TypeScript
-            </p>
-            <p className="text-white/70 text-xs mt-2">
-              This application is for demonstration purposes on Algorand Testnet
+              This application is for demonstration purposes only . Made for arunachal Police by Hills Society
             </p>
           </div>
         </div>

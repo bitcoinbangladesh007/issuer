@@ -75,23 +75,29 @@ const ImageUploader = ({ onHashCalculated = () => {} }: ImageUploaderProps) => {
     setHashProgress(0);
 
     try {
-      // Simulate hash calculation with progress
-      const totalSteps = 10;
-      for (let i = 1; i <= totalSteps; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        setHashProgress(Math.floor((i / totalSteps) * 100));
-      }
+      // Step 1: Read file as ArrayBuffer (20% progress)
+      setHashProgress(20);
+      const arrayBuffer = await image.arrayBuffer();
 
-      // In a real implementation, we would calculate the actual SHA-256 hash here
-      // For now, we'll simulate it with a mock hash
-      const mockHash = Array.from({ length: 64 }, () =>
-        Math.floor(Math.random() * 16).toString(16),
-      ).join("");
+      // Step 2: Calculate SHA-256 hash using Web Crypto API (60% progress)
+      setHashProgress(60);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", arrayBuffer);
 
-      setHash(mockHash);
-      onHashCalculated(mockHash);
+      // Step 3: Convert hash to hexadecimal string (80% progress)
+      setHashProgress(80);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+
+      // Step 4: Complete (100% progress)
+      setHashProgress(100);
+
+      setHash(hashHex);
+      onHashCalculated(hashHex);
     } catch (error) {
       console.error("Error calculating hash:", error);
+      alert("Failed to calculate hash. Please try again.");
     } finally {
       setIsCalculating(false);
     }

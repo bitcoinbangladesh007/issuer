@@ -132,13 +132,13 @@ const TransactionForm = ({
                 <div className="p-1 bg-[#FF9933]/20 rounded mr-2">
                   <Key className="h-3 w-3 text-[#FF9933]" />
                 </div>
-                Acknowledgement Number
+                FIR No
               </Label>
               <Input
                 id="customText"
                 value={customText}
                 onChange={(e) => setCustomText(e.target.value)}
-                placeholder="Enter your acknowledgement number or identifier"
+                placeholder="Enter your FIR number"
                 className={`transition-all duration-200 ${errors.text ? "border-red-500 focus:border-red-500" : "focus:border-[#FF9933] focus:ring-[#FF9933]/20"}`}
               />
               {errors.text && (
@@ -223,7 +223,7 @@ const TransactionForm = ({
               <AlertDescription className="font-medium">
                 <strong>Security Notice:</strong> Never share your mnemonic
                 phrase with anyone. This application is for demonstration
-                purposes on Algorand Testnet only.
+                purposes on Testnet only.
               </AlertDescription>
             </Alert>
           </div>
